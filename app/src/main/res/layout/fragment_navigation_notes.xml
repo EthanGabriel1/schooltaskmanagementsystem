@@ -1,0 +1,47 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">>
+
+    <!-- LinearLayout to organize the heading and RecyclerView -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- TextView for Heading "Notes" aligned to top-left -->
+        <TextView
+            android:id="@+id/textview_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notes"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="start"
+            android:textColor="@color/black"
+            android:paddingBottom="16dp"/>
+
+        <!-- RecyclerView for displaying notes -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_notes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            android:paddingBottom="80dp"/>
+    </LinearLayout>
+
+    <!-- FloatingActionButton positioned upwards -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/ic_add"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

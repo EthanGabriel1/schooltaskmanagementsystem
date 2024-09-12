@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "730463444931",
+    "project_id": "school-task-management-system",
+    "storage_bucket": "school-task-management-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730463444931:android:e87fabff19a1bc87516776",
+        "android_client_info": {
+          "package_name": "com.example.schooltaskmanagementsystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAra2-77IXD_b4gwNhgGGMKc9XpQwzCurU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

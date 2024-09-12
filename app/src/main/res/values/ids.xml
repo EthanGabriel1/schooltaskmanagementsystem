@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="bottom_navigation" type="id" />
+    <item name="nav_notes" type="id" />
+    <item name="textViewHeading" type="id" />
+    <item name="textViewDescription" type="id" />
+    <item name="fragment_container" type="id" />
+    <item name="floatingActionButton" type="id" />
+</resources>

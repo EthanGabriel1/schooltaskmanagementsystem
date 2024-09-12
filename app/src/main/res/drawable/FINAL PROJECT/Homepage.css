@@ -1,0 +1,165 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+body {
+  justify-content: space-between;
+  display: flex;
+}
+
+.aside-1 {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+}
+
+
+.logo {
+  padding-left: 60px;
+  padding-top: 40px;
+  padding-bottom: 120px;
+}
+
+.nav {
+  width: 400px;
+  height: 100vh;
+  position: relative; 
+  
+}
+
+.icon-link {
+  position: absolute;
+  right: 250px;
+  bottom: 22px;
+}
+
+.icon-link:hover {
+  color: #FFFFFF;
+}
+
+.icon-link-analytics {
+  position: absolute;
+  right: 250px;
+  bottom: 23px;
+}
+
+.icon-link-teams {
+  position: absolute;
+  right: 250px;
+  bottom: 23px;
+}
+
+.icon-link-documents {
+  position: absolute;
+  right: 250px;
+  bottom: 23px;
+}
+
+
+.icon-link-settings {
+  position: absolute;
+  right: 250px;
+  bottom: 23px;
+}
+
+.nav-link {
+  position: relative;
+  width: 370px;
+  display: block;
+  font-size: 21px;
+  padding-left: 145px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-family: "Arimo", sans-serif;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-bottom: 15px;
+  gap: 100%;
+}
+
+.dashboard-link {
+  position: relative;
+  width: 370px;
+  display: block;
+  font-size: 21px;
+  padding-left: 145px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-family: "Arimo", sans-serif;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-bottom: 15px;
+  background-color: #202020;
+  color: #FFFFFF;
+}
+
+.nav-link:hover {
+  background-color: #202020;
+  color: #FFFFFF;
+}
+
+.nav-link:hover .icon-link-analytics {
+  content: url('whiteanalytics.png'); /* Update this to the new icon path */
+}
+
+.nav-link:hover .icon-link-teams {
+  content: url('whiteteams.png'); /* Update this to the new icon path */
+}
+
+.nav-link:hover .icon-link-documents {
+  content: url('whitedocu.png'); /* Update this to the new icon path */
+}
+
+.nav-link:hover .icon-link-settings {
+  content: url('whitesettings.png'); /* Update this to the new icon path */
+}
+
+
+.aside-2 {
+  outline: red solid 1px;
+  position: sticky;
+  top: 0;
+  right: 0;
+  width: 500px;
+  height: 100vh;
+}
+
+.profile-pic {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  width: 100px;
+  height: 100px;
+}
+
+.profile-name {
+  position: relative;
+  top: 50px;
+  left: 124px;
+  color: #000000;
+  text-decoration: none;
+  width: 131px;
+  height: 25px;
+  font-family: "Arimo", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.biography {
+  position: relative;
+  width: 153px;
+  height: 25px;
+  color: #C4C4C4;
+  font-family: "Arimo", sans-serif;
+  font-size: 20px;
+  left: 124px;
+  top: 60px;
+}
