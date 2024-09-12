@@ -9,6 +9,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.schooltaskmanagementsystem.User_Authentication.LandingPage;
+
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -21,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LandingPage.class);
                 startActivity(intent);
                 finish();
             }

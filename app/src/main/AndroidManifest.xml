@@ -12,11 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SCHOOLTASKMANAGEMENTSYSTEM"
         tools:targetApi="31">
-
+        <activity
+            android:name=".User_Authentication.SignUpPage"
+            android:exported="true"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".User_Authentication.LoginPage"
+            android:exported="true"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".User_Authentication.LandingPage"
+            android:exported="true"
+            android:theme="@style/Theme.Design.NoActionBar" />
         <activity
             android:name=".Notes.NoteActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
             android:name=".Tasks"
             android:exported="true" />
