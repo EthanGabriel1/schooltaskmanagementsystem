@@ -64,6 +64,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 } else if (id == R.id.menu_delete) {
                     removeTask(position);
                     return true;
+                } else if (id == R.id.menu_mark_done) {
+                    showMarkAsDoneDialog(position); // Show confirmation dialog
+                    return true;
                 } else {
                     return false;
                 }
@@ -71,6 +74,31 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             popupMenu.show();
         });
     }
+
+    // Method to show the confirmation dialog
+    private void showMarkAsDoneDialog(int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Mark as Done")
+                .setMessage("Are you sure you want to mark this task as complete?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    removeTask(position); // Remove task if confirmed
+                    showCongratsDialog(); // Show congratulatory dialog
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    // Method to show the congratulatory dialog
+    private void showCongratsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("CONGRATS!")
+                .setMessage("You have completed the task successfully!")
+                .setPositiveButton("OK", (dialog, which) -> {
+                    // You can add any further actions if needed after the dialog is dismissed
+                })
+                .show();
+    }
+
 
     private void removeTask(int position) {
         tasks.remove(position);
