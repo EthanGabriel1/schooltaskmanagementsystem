@@ -1,4 +1,3 @@
-<!-- res/menu/task_menu.xml -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_edit"
@@ -8,12 +7,12 @@
         android:id="@+id/menu_delete"
         android:title="Delete"
         android:icon="@drawable/ic_delete" />
-
-
     <item
         android:id="@+id/menu_mark_done"
         android:title="Mark as Done"
-        android:icon="@drawable/ic_done" />
-
-
+        android:icon="@drawable/ic_check" />
+    <item
+        android:id="@+id/menu_prioritize"
+        android:title="Prioritize"
+        android:icon="@drawable/ic_pin" />
 </menu>

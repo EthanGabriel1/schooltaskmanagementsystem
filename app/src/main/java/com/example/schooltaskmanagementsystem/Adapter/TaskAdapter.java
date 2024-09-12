@@ -1,30 +1,23 @@
 package com.example.schooltaskmanagementsystem.Adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.schooltaskmanagementsystem.R;
-
-import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
     private Context context;
     private ArrayList<String> tasks;
-    private EditTaskListener editTaskListener; // Callback for editing tasks
+    private EditTaskListener editTaskListener;
 
     public TaskAdapter(Context context, ArrayList<String> tasks, EditTaskListener editTaskListener) {
         this.context = context;
@@ -42,14 +35,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         String task = tasks.get(position);
-
-        // Split the task string into heading and description
         String[] parts = task.split("\n", 2);
         String heading = parts[0];
         String description = parts.length > 1 ? parts[1] : "";
 
-        holder.taskTextView.setText(heading); // Set the heading text
-        holder.taskDescriptionTextView.setText(description); // Set the description text
+        holder.taskTextView.setText(heading);
+        holder.taskDescriptionTextView.setText(description);
 
         holder.taskMenuButton.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(context, v);
@@ -65,7 +56,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                     removeTask(position);
                     return true;
                 } else if (id == R.id.menu_mark_done) {
-                    showMarkAsDoneDialog(position); // Show confirmation dialog
+                    showMarkAsDoneDialog(position);
+                    return true;
+                } else if (id == R.id.menu_prioritize) {
+                    prioritizeTask(position);
                     return true;
                 } else {
                     return false;
@@ -75,30 +69,31 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         });
     }
 
-    // Method to show the confirmation dialog
+    private void prioritizeTask(int position) {
+        String task = tasks.remove(position);
+        tasks.add(0, task); // Move the task to the top
+        notifyItemMoved(position, 0); // Notify the adapter of the change
+    }
+
     private void showMarkAsDoneDialog(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Mark as Done")
                 .setMessage("Are you sure you want to mark this task as complete?")
                 .setPositiveButton("Yes", (dialog, which) -> {
-                    removeTask(position); // Remove task if confirmed
-                    showCongratsDialog(); // Show congratulatory dialog
+                    removeTask(position);
+                    showCongratsDialog();
                 })
                 .setNegativeButton("No", null)
                 .show();
     }
 
-    // Method to show the congratulatory dialog
     private void showCongratsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("CONGRATS!")
                 .setMessage("You have completed the task successfully!")
-                .setPositiveButton("OK", (dialog, which) -> {
-                    // You can add any further actions if needed after the dialog is dismissed
-                })
+                .setPositiveButton("OK", (dialog, which) -> {})
                 .show();
     }
-
 
     private void removeTask(int position) {
         tasks.remove(position);
