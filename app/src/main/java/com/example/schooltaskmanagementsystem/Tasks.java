@@ -6,7 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -20,6 +28,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tasks extends AppCompatActivity implements TaskAdapter.EditTaskListener {
 
@@ -74,13 +84,44 @@ public class Tasks extends AppCompatActivity implements TaskAdapter.EditTaskList
     }
 
     private void loadTasks() {
-        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        String tasksString = sharedPreferences.getString(KEY_TASKS, "");
-        if (!tasksString.isEmpty()) {
-            tasks.addAll(new ArrayList<>(Arrays.asList(tasksString.split(","))));
-            taskAdapter.notifyDataSetChanged();
-        }
+        String url = "http://your-server.com/get_tasks.php"; // Replace with your server URL
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject taskObject = jsonArray.getJSONObject(i);
+                                String heading = taskObject.getString("heading");
+                                String description = taskObject.getString("description");
+
+                                // Combine heading and description into a single task string
+                                String task = heading + "\n" + description;
+                                tasks.add(task);
+                            }
+                            taskAdapter.notifyDataSetChanged();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                    }
+                }
+        );
+
+        queue.add(stringRequest);
     }
+
 
     private void showAddTaskBottomSheet() {
         // Inflate the custom layout for the bottom sheet
@@ -102,16 +143,45 @@ public class Tasks extends AppCompatActivity implements TaskAdapter.EditTaskList
             String description = editTextDescription.getText().toString().trim();
 
             if (!heading.isEmpty() && !description.isEmpty()) {
-                // Combine heading and description into a single task string
-                String task = heading + "\n" + description;
-                tasks.add(task);
-                taskAdapter.notifyItemInserted(tasks.size() - 1);
-                bottomSheetDialog.dismiss(); // Close the bottom sheet
+                // Send the new task to the server using Volley
+                String url = "https://auth-db1367.hstgr.io/add_task.php"; // Replace with your server URL
+
+                RequestQueue queue = Volley.newRequestQueue(this);
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                // Add the task locally
+                                String task = heading + "\n" + description;
+                                tasks.add(task);
+                                taskAdapter.notifyItemInserted(tasks.size() - 1);
+                                bottomSheetDialog.dismiss(); // Close the bottom sheet
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Handle error
+                            }
+                        }
+                ) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("heading", heading);
+                        params.put("description", description);
+                        return params;
+                    }
+                };
+
+                queue.add(stringRequest);
             }
         });
 
         bottomSheetDialog.show();
     }
+
 
     @Override
     public void onEditTask(int position) {
