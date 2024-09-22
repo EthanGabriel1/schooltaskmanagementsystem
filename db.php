@@ -1,9 +1,9 @@
 <?php
 // Database connection settings
 $host = 'localhost';   // Replace with your database host
-$db   = 'u843230181_ThirstTap';    // Replace with your database name
-$user = 'u843230181_ThirstTap';         // Replace with your database username
-$pass = 'ThirstTap123';             // Replace with your database password (if applicable)
+$db   = 'u843230181_TaskManagement';    // Replace with your database name
+$user = 'u843230181_taskmanagement';         // Replace with your database username
+$pass = 'Taskmanage123456';             // Replace with your database password (if applicable)
  $charset = 'utf8mb4';
  
 // Create connection using MySQLi
